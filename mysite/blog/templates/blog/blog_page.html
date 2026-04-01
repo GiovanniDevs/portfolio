@@ -3,7 +3,24 @@
 {% block body_class %}template-blogpage{% endblock %}
 {% block content %}
     <h1>{{ page.title }}</h1>
+    <h3>test</h3>
+    {{ page.author.all }}
     <p class="meta">{{ page.date }}</p>
+    {% with authors=page.authors.all %}
+        {% if authors %}
+            <h3>Written by:</h3>
+            <ul>
+                {% for author in authors %}
+                    <li>
+                        {% image author.author_image fill-40x60 style="vertical-align: middle" %}
+                        {{ author.name }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>none</p>
+        {% endif %}
+    {% endwith %}
     <div class="intro">{{ page.intro }}</div>
     {{ page.body|richtext }}
     {% for item in page.gallery_images.all %}
@@ -15,4 +32,16 @@
     <p>
         <a href="{{ page.get_parent.url }}">Return to blog</a>
     </p>
+    {% with tags=page.tags.all %}
+        {% if tags %}
+            <div class="tags">
+                <h3>Tags</h3>
+                {% for tag in tags %}
+                    <a href="{% slugurl 'tags' %}?tag={{ tag }}">
+                        <button type="button">{{ tag }}</button>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 {% endblock %}

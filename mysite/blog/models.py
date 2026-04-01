@@ -1,9 +1,13 @@
-from modelcluster.fields import ParentalKey
-
+from modelcluster.fields import ParentalKey, ParentalManyToManyField
+from django import forms
 from django.db import models
 from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField
-from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.admin.panels import FieldPanel
+from wagtail.snippets.models import register_snippet
+from wagtail.admin.panels import MultiFieldPanel
+from modelcluster.contrib.taggit import ClusterTaggableManager
+from taggit.models import TaggedItemBase
 
 from wagtail.search import index
 
@@ -21,10 +25,22 @@ class BlogIndexPage(Page):
     content_panels = Page.content_panels + ["intro"]
 
 
+class BlogPageTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'BlogPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
+
 class BlogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
     body = RichTextField(blank=True)
+
+    authors = ParentalManyToManyField('blog.Author', blank=True)
+
+    tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -39,11 +55,9 @@ class BlogPage(Page):
     ]
 
     content_panels = Page.content_panels + [
-        FieldPanel('date'),
-        FieldPanel('intro'),
-        FieldPanel('body'),
-
-        InlinePanel('gallery_images', label="Gallery images"),
+        MultiFieldPanel(["date", FieldPanel("authors", widget=forms.CheckboxSelectMultiple),
+                         ], heading="Blog information"), "tags",
+        "intro", "body", "gallery_images"
     ]
 
 
@@ -59,3 +73,33 @@ class BlogPageGalleryImage(Orderable):
         FieldPanel('image'),
         FieldPanel('caption'),
     ]
+
+
+@register_snippet
+class Author(models.Model):
+    name = models.CharField(max_length=255)
+    author_image = models.ForeignKey(
+        "wagtailimages.Image", null=True, blank=True,
+        on_delete=models.SET_NULL, related_name='+')
+
+    panels = ["name", "author_image"]
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Authors'
+
+
+class BlogTagIndexPage(Page):
+
+    def get_context(self, request):
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        blogpages = BlogPage.objects.filter(tags__name=tag)
+
+        # Update template context
+        context = super().get_context(request)
+        context['blogpages'] = blogpages
+        return context
