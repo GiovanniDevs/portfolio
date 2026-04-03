@@ -2,6 +2,8 @@ from django import template
 
 from base.models import FooterText
 
+from wagtail.models import Site
+
 register = template.Library()
 
 
@@ -16,3 +18,8 @@ def get_footer_text(context):
     return {
         "footer_text": footer_text,
     }
+
+
+@register.simple_tag(takes_context=True)
+def get_site_root(context):
+    return Site.find_for_request(context["request"]).root_page
