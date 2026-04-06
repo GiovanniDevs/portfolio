@@ -37,6 +37,12 @@ STORAGES = {
 
 STATICFILES_STORAGE = STORAGES["staticfiles"]["BACKEND"]
 
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
+SECURE_SSL_REDIRECT = True
+
+CSRF_TRUSTED_ORIGINS = os.getenv("DJANGO_CSRF_TRUSTED_ORIGINS", "").split(",")
+
 try:
     from .local import *
 except ImportError:
