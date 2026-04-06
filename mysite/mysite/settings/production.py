@@ -35,6 +35,8 @@ STORAGES = {
     },
 }
 
+STATICFILES_STORAGE = STORAGES["staticfiles"]["BACKEND"]
+
 try:
     from .local import *
 except ImportError:
