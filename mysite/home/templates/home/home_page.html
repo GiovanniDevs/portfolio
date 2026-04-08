@@ -2,13 +2,60 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block body_class %}template-homepage{% endblock %}
 {% block content %}
-    <div>
-        <h1>{{ page.title }}</h1>
-        {% image page.image fill-480x320 %}
-        <p>{{ page.hero_text }}</p>
-        {% if page.hero_cta_link %}
-            <a href="{% pageurl page.hero_cta_link %}">{% firstof page.hero_cta page.hero_cta_link.title %}</a>
-        {% endif %}
+    <div class="container">
+        <div class="row  justify-content-center">
+            <div class="col-6">
+                <h1>{{ page.title }}</h1>
+                {% image page.image fill-480x320 %}
+                <p>{{ page.hero_text }}</p>
+                {{ page.body|richtext }}
+                {% if page.hero_cta_link %}
+                    <a class="btn btn-outline-info"
+                       href="{% pageurl page.hero_cta_link %}"
+                       role="button">{% firstof page.hero_cta page.hero_cta_link.title %}</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2>01. About me</h2>
+                <div class="row">
+                    <div class="col-8">
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique esse mollitia minus, illo nemo cumque impedit ipsum aperiam voluptatibus unde ipsa sapiente? Sunt dicta beatae soluta incidunt architecto, vel vitae.
+                        </p>
+                    </div>
+                    <div class="col-4">image placeholder</div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2>02. My work so far</h2>
+                <div class="row">
+                    <div class="col-6">Image to the left</div>
+                    <div class="col-6 d-flex flex-column align-items-end">
+                        <h5>Featured project</h5>
+                        <h3>Name of the project</h3>
+                        <p class="boxed-text">boxed description of few lines</p>
+                        <p class="stack">Stack list</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <h2>03. Sometimes i write</h2>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    {{ page.body|richtext }}
 {% endblock content %}

@@ -1,8 +1,8 @@
-*,
+/* *,
 ::before,
 ::after {
   box-sizing: border-box;
-}
+} */
 
 html {
   font-family:
@@ -22,12 +22,7 @@ html {
 
 body {
   min-height: 100vh;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px;
-  display: grid;
-  gap: 3vw;
-  grid-template-rows: min-content 1fr min-content;
+  background-color: #bfba31;
 }
 
 a {
@@ -43,9 +38,9 @@ header {
   border-bottom: 2px dotted;
 }
 
-.template-homepage main {
+/* .template-homepage main {
   text-align: center;
-}
+} */
 
 .skip-link {
   position: absolute;
@@ -56,7 +51,7 @@ header {
   top: 5px;
 }
 
-.page-form label {
+/* .page-form label {
   display: block;
   margin-top: 10px;
   margin-bottom: 5px;
@@ -72,4 +67,5 @@ header {
 
 .page-form .helptext {
   font-style: italic;
-}
+} */
+/* ------- Navigation -------- */
