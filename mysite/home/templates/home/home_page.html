@@ -3,21 +3,23 @@
 {% block body_class %}template-homepage{% endblock %}
 {% block content %}
     <div class="container">
-        <div class="row  justify-content-center">
-            <div class="col-6">
-                <h1>{{ page.title }}</h1>
-                {% image page.image fill-480x320 %}
+        <div class="row justify-content-center my-5">
+            <div class="col-1"></div>
+            <div class="col custom-card shapeless">
                 <p>{{ page.hero_text }}</p>
+                <h1 class="">{{ page.title }}</h1>
+                {% image page.image fill-480x320 %}
                 {{ page.body|richtext }}
                 {% if page.hero_cta_link %}
-                    <a class="btn btn-outline-info"
+                    <a class="btn btn-outline-info mt-4"
                        href="{% pageurl page.hero_cta_link %}"
                        role="button">{% firstof page.hero_cta page.hero_cta_link.title %}</a>
                 {% endif %}
             </div>
+            <div class="col-4"></div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-8">
+            <div class="col-6">
                 <h2>01. About me</h2>
                 <div class="row">
                     <div class="col-8">
@@ -30,7 +32,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-8">
+            <div class="col-6">
                 <h2>02. My work so far</h2>
                 <div class="row">
                     <div class="col-6">Image to the left</div>
@@ -44,7 +46,7 @@
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-8">
+            <div class="col-6">
                 <h2>03. Sometimes i write</h2>
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">

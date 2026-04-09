@@ -1,8 +1,56 @@
-/* *,
-::before,
-::after {
-  box-sizing: border-box;
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
+/* :root {
+  --primary-color: #88b99e;
+  --secondary-color: #ce9292;
+  --accent-color: #cec940;
+  --primary-background: #fdfdfb;
 } */
+
+/* :root {
+  --text: #dfebf0;
+  --background: #092834;
+  --primary: #99c2ce;
+  --secondary: #2e6378;
+  --accent: #d1944b;
+} */
+
+:root {
+  --text: #bebebe;
+  --background: #282c34;
+  --primary: #99c2ce;
+  --secondary: #2e6378;
+  --accent: #d1944b;
+}
+
+.jet-mono {
+  font-family: "JetBrains Mono", monospace;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.space-g {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+h1 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 450%;
+}
+
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
 html {
   font-family:
@@ -21,12 +69,14 @@ html {
 }
 
 body {
+  font-family: "JetBrains Mono", monospace;
   min-height: 100vh;
-  background-color: #bfba31;
+  background-color: var(--background);
+  color: var(--text);
 }
 
 a {
-  color: currentColor;
+  color: white;
 }
 
 footer {
@@ -34,9 +84,9 @@ footer {
   text-align: center;
 }
 
-header {
+/* header {
   border-bottom: 2px dotted;
-}
+} */
 
 /* .template-homepage main {
   text-align: center;
@@ -68,4 +118,44 @@ header {
 .page-form .helptext {
   font-style: italic;
 } */
+
+/* ------ General Styles ------ */
+.bg-light-g {
+  background-color: #1b1b1b;
+}
+
+.bg-light {
+  background-color: #fdfdfbab;
+}
+
+.white-text {
+  color: white;
+}
+
+.shapeless {
+  clip-path: polygon(0% 5%, 90% 10%, 100% 100%, 5% 95%);
+}
+
 /* ------- Navigation -------- */
+.nav-link {
+  color: black;
+}
+.navbar-brand-custom {
+  padding-top: var(--bs-navbar-brand-padding-y);
+  padding-bottom: var(--bs-navbar-brand-padding-y);
+  margin-right: var(--bs-navbar-brand-margin-end);
+  font-size: var(--bs-navbar-brand-font-size);
+  color: var(--bs-navbar-brand-color);
+  text-decoration: none;
+  white-space: nowrap;
+  color: black;
+}
+
+/* ------ Custom Cards ------ */
+
+.custom-card {
+  background-color: #ffffff0c;
+
+  margin: 2rem;
+  padding: 4rem;
+}
