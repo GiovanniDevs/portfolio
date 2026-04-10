@@ -40,7 +40,6 @@ h1 {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 450%;
 }
 
 h2,
@@ -48,7 +47,7 @@ h3,
 h4,
 h5 {
   font-family: "Space Grotesk", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -91,7 +90,9 @@ footer {
 /* .template-homepage main {
   text-align: center;
 } */
-
+.more-margin {
+  margin-top: 10rem;
+}
 .skip-link {
   position: absolute;
   top: -30px;
@@ -100,24 +101,6 @@ footer {
 .skip-link:focus-visible {
   top: 5px;
 }
-
-/* .page-form label {
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.page-form :is(textarea, input, select) {
-  width: 100%;
-  max-width: 500px;
-  min-height: 40px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
-.page-form .helptext {
-  font-style: italic;
-} */
 
 /* ------ General Styles ------ */
 .bg-light-g {
@@ -140,22 +123,21 @@ footer {
 .nav-link {
   color: black;
 }
-.navbar-brand-custom {
-  padding-top: var(--bs-navbar-brand-padding-y);
-  padding-bottom: var(--bs-navbar-brand-padding-y);
-  margin-right: var(--bs-navbar-brand-margin-end);
-  font-size: var(--bs-navbar-brand-font-size);
-  color: var(--bs-navbar-brand-color);
-  text-decoration: none;
-  white-space: nowrap;
-  color: black;
-}
 
 /* ------ Custom Cards ------ */
 
 .custom-card {
   background-color: #ffffff0c;
-
-  margin: 2rem;
   padding: 4rem;
+}
+
+@media (max-width: 540px) {
+  .shapeless {
+    clip-path: none;
+  }
+
+  .custom-card {
+    background-color: #ffffff0c;
+    padding: 1rem;
+  }
 }
