@@ -1,21 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
-/* :root {
-  --primary-color: #88b99e;
-  --secondary-color: #ce9292;
-  --accent-color: #cec940;
-  --primary-background: #fdfdfb;
-} */
-
-/* :root {
-  --text: #dfebf0;
-  --background: #092834;
-  --primary: #99c2ce;
-  --secondary: #2e6378;
-  --accent: #d1944b;
-} */
-
 :root {
   --text: #bebebe;
   --background: #282c34;
@@ -40,6 +25,8 @@ h1 {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-style: normal;
+  font-size: 400%;
+  color: rgb(226, 226, 226);
 }
 
 h2,
@@ -49,6 +36,11 @@ h5 {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 500;
   font-style: normal;
+  color: rgb(226, 226, 226);
+}
+
+.project-title {
+  font-weight: 600;
 }
 
 html {
@@ -112,7 +104,15 @@ footer {
 }
 
 .white-text {
-  color: white;
+  color: rgb(226, 226, 226);
+}
+
+.yellow-text {
+  color: rgb(221, 221, 61);
+}
+
+.red-text {
+  color: rgb(204, 69, 69);
 }
 
 .shapeless {
@@ -131,6 +131,11 @@ footer {
   padding: 4rem;
 }
 
+.project-text {
+  background-color: #00000034;
+  padding: 1rem;
+}
+
 @media (max-width: 540px) {
   .shapeless {
     clip-path: none;
@@ -139,5 +144,11 @@ footer {
   .custom-card {
     background-color: #ffffff0c;
     padding: 1rem;
+  }
+}
+
+@media (min-width: 540px) {
+  .shifter {
+    min-width: 5rem;
   }
 }

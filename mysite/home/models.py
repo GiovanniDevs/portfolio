@@ -4,6 +4,8 @@ from wagtail.models import Page
 from wagtail.fields import RichTextField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 
+from blog.models import BlogPage
+
 
 class HomePage(Page):
 
@@ -36,6 +38,12 @@ class HomePage(Page):
     )
 
     body = RichTextField(blank=True)
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        latest = BlogPage.objects.live().order_by('-first_published_at').first()
+        context['latest_blogpage'] = latest
+        return context
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
