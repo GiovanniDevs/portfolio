@@ -74,14 +74,18 @@
                         "03. Sometimes i write"
                     {% endverbatim %}
                 </h2>
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ latest_blogpage.title }}</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">{{ latest_blogpage.date }}</h6>
-                        <p class="card-text">{{ latest_blogpage.intro }}</p>
+                <p class="my-2 ">Latest entry</p>
+                <div class="card my-3 blog-card">
+                    <div class="card-body white-text {">
+                        <h5 class="">{{ latest_blogpage.title }}</h5>
+                        <p class="mb-2">{{ latest_blogpage.date }}</p>
+                        <p class="">{{ latest_blogpage.intro }}</p>
                         <a href="{% pageurl latest_blogpage %}" class="card-link">Read post</a>
                     </div>
                 </div>
+                <a class="ms-auto btn btn-outline-secondary mt-4"
+                   href="{% pageurl page.hero_cta_link %}"
+                   role="button">Go to Blog</a>
             </div>
         </div>
     </div>

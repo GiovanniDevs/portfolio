@@ -136,6 +136,12 @@ footer {
   padding: 1rem;
 }
 
+.blog-card {
+  background-color: #ffffff0c;
+  border-radius: 0%;
+  border-width: 0;
+}
+
 @media (max-width: 540px) {
   .shapeless {
     clip-path: none;
