@@ -69,24 +69,83 @@
         </div>
         <div class="row justify-content-center more-margin">
             <div class="col  col-md-8 col-lg-6 ">
-                <h2>
-                    {% verbatim %}
-                        "03. Sometimes i write"
-                    {% endverbatim %}
-                </h2>
-                <p class="my-2 ">Latest entry</p>
-                <div class="card my-3 blog-card">
-                    <div class="card-body white-text {">
+                {% if page.featured_projects %}
+                    <section class="featured-projects">
+                        <h2>Featured Projects</h2>
+                        <div class="grid">{{ page.featured_projects }}</div>
+                    </section>
+                {% endif %}
+            </div>
+            <div class="row justify-content-center more-margin">
+                <div class="col  col-md-8 col-lg-6 ">
+                    <h2>
+                        {% verbatim %}
+                            "03. Sometimes i write"
+                        {% endverbatim %}
+                    </h2>
+                    {% comment %} <div class="card my-3 blog-card">
+                    <div class="card-body white-text">
                         <h5 class="">{{ latest_blogpage.title }}</h5>
                         <p class="mb-2">{{ latest_blogpage.date }}</p>
                         <p class="">{{ latest_blogpage.intro }}</p>
                         <a href="{% pageurl latest_blogpage %}" class="card-link">Read post</a>
                     </div>
+                    </div> {% endcomment %}
+                    <section>
+                        {% if page.featured_posts %}
+                            <section class="featured-posts">
+                                <p class="">Featured Posts</p>
+                                <div class="grid">
+                                    {% for block in page.featured_posts %}
+                                        {% with post=block.value.specific %}
+                                            <div class="card my-3 blog-card">
+                                                <div class="card-body white-text">
+                                                    <h5 class="">{{ post.title }}</h5>
+                                                    <p class="mb-2">{{ post.date }}</p>
+                                                    <p class="">{{ post.intro }}</p>
+                                                    <a href="{% pageurl post %}" class="card-link">Read post</a>
+                                                </div>
+                                            </div>
+                                            {% comment %} <div class="card">
+                                            {# Main image #}
+                                            {% if post.main_image %}
+                                                {% image post.main_image fill-400x225 %}
+                                            {% endif %}
+                                            {# Title (links to the full post) #}
+                                            <h3>
+                                                <a href="{% pageurl post %}">{{ post.title }}</a>
+                                            </h3>
+                                            {# Date #}
+                                            <p class="date">{{ post.date }}</p>
+                                            {# Intro #}
+                                            <p>{{ post.intro }}</p>
+                                            {# Authors #}
+                                            {% if post.authors.all %}
+                                                <p class="authors">
+                                                    By:
+                                                    {% for author in post.authors.all %}
+                                                        {{ author.name }}
+                                                        {% if not forloop.last %},{% endif %}
+                                                    {% endfor %}
+                                                </p>
+                                            {% endif %}
+                                            {# Tags #}
+                                            {% if post.tags.all %}
+                                                <p class="tags">
+                                                    {% for tag in post.tags.all %}{{ tag.name }}{% endfor %}
+                                                </p>
+                                            {% endif %}
+                                            </div> {% endcomment %}
+                                        {% endwith %}
+                                    {% endfor %}
+                                </div>
+                            </section>
+                        {% endif %}
+                    </section>
+                    <a class="ms-auto btn btn-outline-secondary mt-4"
+                       href="{% pageurl page.hero_cta_link %}"
+                       role="button">Go to Blog</a>
                 </div>
-                <a class="ms-auto btn btn-outline-secondary mt-4"
-                   href="{% pageurl page.hero_cta_link %}"
-                   role="button">Go to Blog</a>
             </div>
         </div>
-    </div>
-{% endblock content %}
+    {% endblock content %}

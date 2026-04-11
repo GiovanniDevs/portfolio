@@ -1,0 +1,16 @@
+{% load wagtailcore_tags %}
+<div class="card my-3 blog-card">
+    <div class="card-body white-text">
+        <h3>{{ self.title }}</h3>
+        <div>{{ self.description }}</div>
+        <p class="tech-stack">{{ self.tech_stack }}</p>
+        <p>
+            <a href=" self.repo_link " target="_blank" rel="noopener">GitHub Repo</a>
+        </p>
+        {% if self.deployed_link %}
+            <p>
+                <a href=" self.deployed_link " target="_blank" rel="noopener">Live Site</a>
+            </p>
+        {% endif %}
+    </div>
+</div>

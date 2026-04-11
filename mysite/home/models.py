@@ -1,10 +1,12 @@
 from django.db import models
 
 from wagtail.models import Page
-from wagtail.fields import RichTextField
+from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel, MultiFieldPanel
+from wagtail.blocks import PageChooserBlock
 
 from blog.models import BlogPage
+from home.blocks import ProjectCardBlock
 
 
 class HomePage(Page):
@@ -39,6 +41,20 @@ class HomePage(Page):
 
     body = RichTextField(blank=True)
 
+    featured_posts = StreamField(
+        [("post", PageChooserBlock(page_type="blog.BlogPage"))],
+        blank=True,
+        use_json_field=True,
+        help_text="Pivck blog posts to feature on the homepage.",
+    )
+
+    featured_projects = StreamField(
+        [("project", ProjectCardBlock())],
+        blank=True,
+        use_json_field=True,
+        help_text="Use this section to showcase your projects"
+    )
+
     def get_context(self, request):
         context = super().get_context(request)
         latest = BlogPage.objects.live().order_by('-first_published_at').first()
@@ -56,4 +72,6 @@ class HomePage(Page):
             heading="Hero section",
         ),
         FieldPanel('body'),
+        FieldPanel("featured_posts"),
+        FieldPanel("featured_projects"),
     ]
