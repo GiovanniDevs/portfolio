@@ -39,10 +39,12 @@
         <div class="row  offset-lg-1 more-margin">
             <div class="col col-md-10">
                 <h2 class="mb-4">
-                    {% verbatim %}
+                    {% comment %} {% verbatim %}
                         <span class="red-text">&lt;</span> 02. My work so far
                         <span class="red-text">/&gt;</span>
-                    {% endverbatim %}
+                    {% endverbatim %} {% endcomment %}
+                    <span class="red-text"><i class="fa-solid fa-code"></i></span> 02. My work so far
+                    <span class="red-text"><i class="fa-solid fa-code"></i></span>
                 </h2>
                 <div class="row">
                     <div class="col-12 col-md-7">
@@ -63,16 +65,25 @@
                             PostgreSQL
                             Heroku
                         </p>
+                        <p>
+                            <i class="fa-brands fa-github"></i> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center more-margin">
-            <div class="col  col-md-8 col-lg-6 ">
+            <div class="col  col-md-10 col-lg-8">
                 {% if page.featured_projects %}
                     <section class="featured-projects">
-                        <h2>Featured Projects</h2>
-                        <div class="grid">{{ page.featured_projects }}</div>
+                        <div class="container">
+                            <div class="row">
+                                <h2>Featured Projects</h2>
+                                {% for block in page.featured_projects %}
+                                    <div class="col-12 col-md-6">{% include_block block %}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
                     </section>
                 {% endif %}
             </div>
@@ -80,17 +91,9 @@
                 <div class="col  col-md-8 col-lg-6 ">
                     <h2>
                         {% verbatim %}
-                            "03. Sometimes i write"
+                            03. Sometimes i write <i class="fa-solid fa-terminal"></i>
                         {% endverbatim %}
                     </h2>
-                    {% comment %} <div class="card my-3 blog-card">
-                    <div class="card-body white-text">
-                        <h5 class="">{{ latest_blogpage.title }}</h5>
-                        <p class="mb-2">{{ latest_blogpage.date }}</p>
-                        <p class="">{{ latest_blogpage.intro }}</p>
-                        <a href="{% pageurl latest_blogpage %}" class="card-link">Read post</a>
-                    </div>
-                    </div> {% endcomment %}
                     <section>
                         {% if page.featured_posts %}
                             <section class="featured-posts">
@@ -106,36 +109,6 @@
                                                     <a href="{% pageurl post %}" class="card-link">Read post</a>
                                                 </div>
                                             </div>
-                                            {% comment %} <div class="card">
-                                            {# Main image #}
-                                            {% if post.main_image %}
-                                                {% image post.main_image fill-400x225 %}
-                                            {% endif %}
-                                            {# Title (links to the full post) #}
-                                            <h3>
-                                                <a href="{% pageurl post %}">{{ post.title }}</a>
-                                            </h3>
-                                            {# Date #}
-                                            <p class="date">{{ post.date }}</p>
-                                            {# Intro #}
-                                            <p>{{ post.intro }}</p>
-                                            {# Authors #}
-                                            {% if post.authors.all %}
-                                                <p class="authors">
-                                                    By:
-                                                    {% for author in post.authors.all %}
-                                                        {{ author.name }}
-                                                        {% if not forloop.last %},{% endif %}
-                                                    {% endfor %}
-                                                </p>
-                                            {% endif %}
-                                            {# Tags #}
-                                            {% if post.tags.all %}
-                                                <p class="tags">
-                                                    {% for tag in post.tags.all %}{{ tag.name }}{% endfor %}
-                                                </p>
-                                            {% endif %}
-                                            </div> {% endcomment %}
                                         {% endwith %}
                                     {% endfor %}
                                 </div>
