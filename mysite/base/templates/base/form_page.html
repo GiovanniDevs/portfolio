@@ -6,6 +6,47 @@
             <div class="col">
                 <h1>{{ page.title }}</h1>
                 <div>{{ page.intro|richtext }}</div>
+                <form class="page-form"
+                      action="{% pageurl page %}"
+                      method="POST"
+                      novalidate>
+                    {% csrf_token %}
+                    {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                    {% if form.non_field_errors %}
+                        <div class="form-errors">
+                            {% for err in form.non_field_errors %}<p>{{ err }}</p>{% endfor %}
+                        </div>
+                    {% endif %}
+                    {% for field in form.visible_fields %}
+                        <div class="form-row form-row--{{ field.name }}">
+                            <label for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                                {% if field.field.required %}<span>*</span>{% endif %}
+                            </label>
+                            {{ field }}
+                            {% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}
+                            {% if field.errors %}
+                                <div class="field-errors">
+                                    {% for err in field.errors %}<p>{{ err }}</p>{% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% comment %} 
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <h1>{{ page.title }}</h1>
+                <div>{{ page.intro|richtext }}</div>
                 <form class="page-form" action="{% pageurl page %}" method="POST">
                     {% csrf_token %}
                     {{ form.as_div }}
@@ -15,3 +56,4 @@
         </div>
     </div>
 {% endblock content %}
+{% endcomment %}
