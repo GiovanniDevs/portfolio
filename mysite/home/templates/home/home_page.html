@@ -5,11 +5,11 @@
     <div class="container">
         <div class="row justify-content-center my-5">
             <div class="col col-md-10 custom-card shapeless d-flex flex-column mx-1">
-                <p>{{ page.hero_text }}</p>
+                <p class="c-primary">{{ page.hero_text }}</p>
                 <h1 class="white-text">{{ page.title }}</h1>
                 {{ page.body|richtext }}
                 {% if page.hero_cta_link %}
-                    <a class="ms-auto btn btn-outline-info mt-4"
+                    <a class="ms-auto btn btn-outline-info c-button mt-4"
                        href="{% pageurl page.hero_cta_link %}"
                        role="button">{% firstof page.hero_cta page.hero_cta_link.title %}</a>
                 {% endif %}
@@ -17,69 +17,68 @@
         </div>
         <div class="row more-margin justify-content-center">
             <div class="col col-md-10 col-lg-8">
-                <h2>
-                    {% verbatim %}
-                        <span class="yellow-text">{%</span> 01. About me <span class="yellow-text">%}</span>
-                    {% endverbatim %}
+                <h2 class="section-title">
+                    <span class="h5 jet-mono c-primary">01.</span><span>About me</span>
                 </h2>
-                <div class="row mt-3">
+                <div class="row mt-3 align-items-start">
                     <div class="col-12 col-sm-8">
                         <p class="">
-                            Junior Software Developer with a strong foundation in front-end and back-end development gained through the
-                            AI-Augmented Full-Stack Software Development Skills Bootcamp. Skilled in HTML, CSS, JavaScript, Python, and
-                            Django, with experience in agile, team-based projects and industry best practices. Bringing 10 years of hospitality
-                            experience and a background in 3D art, combining strong communication and problem-solving skills. Eager to
-                            contribute to dynamic teams, learn new technologies, and grow as a versatile full-stack professional.
+                            I'm Giovanni, a junior web developer based in Bristol. I recently retrained in tech through an <span class="c-accent">AI-Augmented Full-Stack</span> bootcamp, and since then I've just kept going. There's always something new to dig into, whether that's a framework I haven't touched yet or just keeping up with how fast everything moves in this space.
+                            I use <span class="c-accent">AI to work smarter and move faster</span>, but the thinking and decisions are mine. It's a tool in the box, <span class="c-accent">not a shortcut</span>.
+                        </p>
+                        <p>
+                            Personally, I gravitate more towards backend work. I like the logic side of things, how to structure something well and how to get it running smoothly in production. That said, I enjoy full-stack too. There's something satisfying about building both sides and seeing it all come together.
+                            I also studied Computer Generated Animation at uni, so I've got a bit of a creative background in the mix. It means I tend to think about problems differently, and I communicate well with all sorts of people.
+                        </p>
+                        <p class="c-accent">
+                            What I'm working with right now: Python, Django, Wagtail, HTML, CSS, JavaScript, PostgreSQL, Git & GitHub.
                         </p>
                     </div>
-                    <div class="col-12 col-sm-4">{% image page.image min-200x200 %}</div>
+                    <div class=" col-12 col-sm-4 d-flex justify-content-center">
+                        <div class="profile-img">{% image page.image min-200x200 %}</div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row  offset-lg-1 more-margin">
             <div class="col col-md-10">
-                <h2 class="mb-4">
-                    {% comment %} {% verbatim %}
-                        <span class="red-text">&lt;</span> 02. My work so far
-                        <span class="red-text">/&gt;</span>
-                    {% endverbatim %} {% endcomment %}
-                    <span class="red-text"><i class="fa-solid fa-code"></i></span> 02. Some things I've built
-                    <span class="red-text"><i class="fa-solid fa-code"></i></span>
+                <h2 class="mb-4 section-title">
+                    <span class="h5 jet-mono c-primary">02.</span> Some things I've built
                 </h2>
                 <div class="row">
-                    <div class="col-12 col-md-7">
+                    <div class="col-12 col-md-7 mb-3">
                         <img class="img-fluid"
                              src="../static/images/project.png"
                              alt="featured project">
                     </div>
                     <div class="col-12 col-md-5 d-flex flex-column text-end align-items-end">
-                        <p>Featured project</p>
+                        <p class="c-primary">Featured project</p>
                         <h3 class="project-title">Problem? Solved.</h3>
                         <p class="project-text">
                             A platform where workers share workplace issues and others add “Takes” with experiences and solutions, helping surface problems and inspire business ideas.
                         </p>
-                        <p class="stack">
-                            Stack - JavaScript
+                        <p class="c-accent stack">
+                            JavaScript
                             Python
                             Django
                             PostgreSQL
                             Heroku
                         </p>
-                        <p>
+                        <p class="link-icon">
                             <i class="fa-brands fa-github"></i> <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center more-margin">
+        <div class="row justify-content-center more-margin2">
             <div class="col  col-md-10 col-lg-8">
                 {% if page.featured_projects %}
                     <section class="featured-projects">
                         <div class="container">
                             <div class="row">
                                 <div class="col-12">
-                                    <h2 class="h3">Other projects...</h2>
+                                    <h2 class="h4">Other projects...</h2>
                                 </div>
                             </div>
                             <div class="row">
@@ -94,36 +93,61 @@
             <div class="row justify-content-center more-margin">
                 <div class="col  col-md-8 col-lg-6 ">
                     <h2>
-                        {% verbatim %}
-                            03. Sometimes i write <i class="fa-solid fa-terminal"></i>
-                        {% endverbatim %}
+                        <span class="h5 jet-mono c-primary">03.</span> Sometimes i write <i class="fa-solid fa-terminal"></i>
                     </h2>
-                    <section>
-                        {% if page.featured_posts %}
-                            <section class="featured-posts">
-                                <p class="">Featured Posts</p>
-                                <div class="grid">
-                                    {% for block in page.featured_posts %}
-                                        {% with post=block.value.specific %}
-                                            <div class="card my-3 blog-card">
-                                                <div class="card-body white-text">
-                                                    <a href="{% pageurl post %}" class="card-link">
-                                                        <h5 class="">{{ post.title }}</h5>
-                                                    </a>
-                                                    <p class="mb-2">{{ post.date }}</p>
-                                                    <p class="">{{ post.intro }}</p>
-                                                    <a href="{% pageurl post %}" class="card-link">Read post</a>
-                                                </div>
+                    {% if page.featured_posts %}
+                        <section class="featured-posts">
+                            <p class="c-primary">Featured Posts</p>
+                            <div class="grid">
+                                {% for block in page.featured_posts %}
+                                    {% with post=block.value.specific %}
+                                        <div class="card my-3 blog-card">
+                                            <div class="card-body white-text">
+                                                <a href="{% pageurl post %}" class="card-link">
+                                                    <h5 class="">{{ post.title }}</h5>
+                                                </a>
+                                                <p class="l-text">{{ post.intro }}</p>
+                                                <p class="mb-2">{{ post.date }}</p>
                                             </div>
-                                        {% endwith %}
-                                    {% endfor %}
-                                </div>
-                            </section>
-                        {% endif %}
-                    </section>
-                    <a class="ms-auto btn btn-outline-secondary mt-4"
+                                        </div>
+                                    {% endwith %}
+                                {% endfor %}
+                            </div>
+                        </section>
+                    {% endif %}
+                    <a class="ms-auto btn btn-outline-info c-button mt-4"
                        href="{% pageurl page.hero_cta_link %}"
-                       role="button">Go to Blog</a>
+                       role="button">More Articles</a>
+                </div>
+            </div>
+            <div class="row justify-content-center more-margin">
+                <div class="col  col-md-8 col-lg-6 ">
+                    <h2>
+                        <span class="h5 jet-mono c-primary">04.</span> Get in touch <i class="fa-solid fa-terminal"></i>
+                    </h2>
+                    {% if page.featured_posts %}
+                        <section class="featured-posts">
+                            <p class="c-primary">Featured Posts</p>
+                            <div class="grid">
+                                {% for block in page.featured_posts %}
+                                    {% with post=block.value.specific %}
+                                        <div class="card my-3 blog-card">
+                                            <div class="card-body white-text">
+                                                <a href="{% pageurl post %}" class="card-link">
+                                                    <h5 class="">{{ post.title }}</h5>
+                                                </a>
+                                                <p class="l-text">{{ post.intro }}</p>
+                                                <p class="mb-2">{{ post.date }}</p>
+                                            </div>
+                                        </div>
+                                    {% endwith %}
+                                {% endfor %}
+                            </div>
+                        </section>
+                    {% endif %}
+                    <a class="ms-auto btn btn-outline-info c-button mt-4"
+                       href="{% pageurl page.hero_cta_link %}"
+                       role="button">More Articles</a>
                 </div>
             </div>
         </div>

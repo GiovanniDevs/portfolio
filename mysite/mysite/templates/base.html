@@ -34,11 +34,14 @@
             {% block extra_css %}{# Override this in templates to add extra stylesheets #}{% endblock %}
         </head>
         <body class="{% block body_class %}{% endblock %}">
-            {% include "includes/header.html" %}
-            <main id="main">
-                {% block content %}{% endblock %}
-            </main>
-            {% include "includes/footer.html" %}
+            <div class="bg-fixed"></div>
+            <div class="page-content">
+                {% include "includes/header.html" %}
+                <main id="main">
+                    {% block content %}{% endblock %}
+                </main>
+                {% include "includes/footer.html" %}
+            </div>
             {# Global javascript #}
             <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

@@ -3,9 +3,10 @@
 
 :root {
   --text: #bebebe;
-  --background: #282c34;
-  --primary: #99c2ce;
-  --secondary: #2e6378;
+  /* --background: #282c34; */
+  --background: #1f2633;
+  --primary: #6abdd2;
+  --secondary: #1c3f4d;
   --accent: #d1944b;
 }
 
@@ -57,14 +58,17 @@ html {
     "Segoe UI Emoji",
     "Segoe UI Symbol",
     "Noto Color Emoji";
+  height: 100%;
 }
 
 body {
   font-family: "JetBrains Mono", monospace;
   min-height: 100vh;
-  background-color: var(--background);
+  background-color: red;
   color: var(--text);
   font-size: 90%;
+  padding-top: 80px;
+  height: 100%;
 }
 
 a {
@@ -78,8 +82,13 @@ footer {
 }
 
 .more-margin {
+  margin-top: 20rem;
+}
+
+.more-margin2 {
   margin-top: 10rem;
 }
+
 .skip-link {
   position: absolute;
   top: -30px;
@@ -110,15 +119,33 @@ footer {
   color: rgb(204, 69, 69);
 }
 
+.c-primary {
+  color: var(--primary);
+}
+
+.c-secondary {
+  color: var(--secondary);
+}
+
+.c-accent {
+  color: var(--accent);
+}
+
 .shapeless {
   clip-path: polygon(0% 5%, 90% 10%, 100% 100%, 5% 95%);
 }
 
 /* ------- Navigation -------- */
 .nav-link {
-  color: black;
+  color: var(--primary);
 }
 
+.blur-nav {
+  background: rgba(255, 255, 255, 0); /* transparent */
+  backdrop-filter: blur(10px); /* blur effect */
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border-bottom: 1px solid rgba(112, 112, 112, 0.116); /* subtle edge */
+}
 /* ------ Custom Cards ------ */
 
 .custom-card {
@@ -133,6 +160,10 @@ footer {
 
 .project-icon {
   font-size: 200%;
+}
+
+.link-icon {
+  font-size: 130%;
 }
 
 .blog-card {
@@ -170,6 +201,15 @@ footer {
   background-color: #ffffff0c;
   border-radius: 0%;
   border-width: 0;
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.featured-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .featured-card .card-body {
@@ -183,12 +223,88 @@ footer {
 
 .featured-description {
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* adjust this number */
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
 .projects-text {
-  font-size: 80%;
+  font-size: 90%;
   font-weight: 100;
+}
+
+/* ----- profile image ------ */
+
+.profile-img {
+  filter: grayscale();
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.profile-img:hover {
+  filter: none;
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+  display: flex;
+  align-items: first baseline;
+  gap: 12px;
+  width: 100%;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--primary); /* change to your accent color if needed */
+  margin-left: 12px;
+}
+
+/*  ----- Fixed BG ----- */
+
+.bg-fixed {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(var(--background), var(--secondary));
+  z-index: -1;
+}
+
+.page-content {
+  position: relative;
+}
+
+/*  ----- Blog Article ----- */
+
+.l-text {
+  font-weight: 100;
+}
+/*  ------ Buttons ----- */
+
+.c-button {
+  background-color: transparent;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 0px;
+}
+
+.c-button:hover {
+  background-color: var(--primary);
+  color: var(--secondary);
+  border: 1px solid transparent;
+  border-radius: 0px;
+}
+
+/*  ---- fix footer to the bottom ------  */
+.page-content {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
