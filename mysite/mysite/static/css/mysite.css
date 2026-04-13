@@ -224,6 +224,7 @@ footer {
 .featured-description {
   display: -webkit-box;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -307,4 +308,126 @@ footer {
 
 main {
   flex: 1;
+}
+
+/* ----- Form Page ----- */
+
+.form-page-shell {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.form-page-title {
+  margin-bottom: 1rem;
+}
+
+.form-page-intro {
+  margin-bottom: 1.25rem;
+}
+
+.page-form {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(106, 189, 210, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 1.25rem;
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: #e2e2e2;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.required-mark {
+  color: var(--accent);
+}
+
+.page-form input,
+.page-form select,
+.page-form textarea {
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(15, 20, 28, 0.35);
+  color: #f1f1f1;
+  padding: 0.62rem 0.7rem;
+  border-radius: 0;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.page-form input::placeholder,
+.page-form textarea::placeholder {
+  color: rgba(241, 241, 241, 0.52);
+}
+
+.page-form textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
+
+.page-form input:focus,
+.page-form select:focus,
+.page-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(106, 189, 210, 0.22);
+  background: rgba(15, 20, 28, 0.55);
+}
+
+.page-form input[type="checkbox"],
+.page-form input[type="radio"] {
+  width: auto;
+  margin-right: 0.5rem;
+  transform: translateY(1px);
+}
+
+.field-help {
+  display: block;
+  margin-top: 0.35rem;
+  color: rgba(226, 226, 226, 0.76);
+}
+
+.form-errors,
+.field-errors {
+  border-left: 3px solid #da5b5b;
+  background: rgba(218, 91, 91, 0.1);
+  padding: 0.55rem 0.75rem;
+}
+
+.form-errors {
+  margin-bottom: 1rem;
+}
+
+.field-errors {
+  margin-top: 0.45rem;
+}
+
+.form-errors p,
+.field-errors p {
+  margin: 0;
+  color: #ffb1b1;
+}
+
+.form-submit {
+  margin-top: 0.55rem;
+  padding: 0.55rem 1.15rem;
+}
+
+@media (max-width: 768px) {
+  .page-form {
+    padding: 1rem;
+  }
+
+  .form-label {
+    font-size: 0.95rem;
+  }
 }
