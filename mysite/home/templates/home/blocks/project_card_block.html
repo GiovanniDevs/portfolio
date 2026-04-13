@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
-<div class="card my-3 blog-card">
+<div class="card my-3 featured-card">
     <div class="card-body white-text">
-        <div class="d-flex align-items-top mb-2">
+        <div class="d-flex align-items-top mb-1">
             <p class="project-icon">
                 <i class="fa-regular fa-folder-closed"></i>
             </p>
@@ -12,8 +12,10 @@
                 {% endif %}
             </div>
         </div>
-        <h3>{{ self.title }}</h3>
-        <div>{{ self.description }}</div>
-        <p class="tech-stack">{{ self.tech_stack }}</p>
+        <h3 class="h6">
+            {{ self.title }}
+        </h4>
+        <div class="featured-description projects-text">{{ self.description }}</div>
+        <p class="projects-text tech-stack">{{ self.tech_stack }}</p>
     </div>
 </div>

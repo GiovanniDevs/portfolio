@@ -43,7 +43,7 @@
                         <span class="red-text">&lt;</span> 02. My work so far
                         <span class="red-text">/&gt;</span>
                     {% endverbatim %} {% endcomment %}
-                    <span class="red-text"><i class="fa-solid fa-code"></i></span> 02. My work so far
+                    <span class="red-text"><i class="fa-solid fa-code"></i></span> 02. Some things I've built
                     <span class="red-text"><i class="fa-solid fa-code"></i></span>
                 </h2>
                 <div class="row">
@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-12 col-md-5 d-flex flex-column text-end align-items-end">
                         <p>Featured project</p>
-                        <h3 class="fst-italic project-title">Problem? Solved.</h3>
+                        <h3 class="project-title">Problem? Solved.</h3>
                         <p class="project-text">
                             A platform where workers share workplace issues and others add “Takes” with experiences and solutions, helping surface problems and inspire business ideas.
                         </p>
@@ -78,9 +78,13 @@
                     <section class="featured-projects">
                         <div class="container">
                             <div class="row">
-                                <h2>Featured Projects</h2>
+                                <div class="col-12">
+                                    <h2 class="h3">Other projects...</h2>
+                                </div>
+                            </div>
+                            <div class="row">
                                 {% for block in page.featured_projects %}
-                                    <div class="col-12 col-md-6">{% include_block block %}</div>
+                                    <div class="col-12 col-md-6 col-xl-4 ">{% include_block block %}</div>
                                 {% endfor %}
                             </div>
                         </div>
@@ -103,7 +107,9 @@
                                         {% with post=block.value.specific %}
                                             <div class="card my-3 blog-card">
                                                 <div class="card-body white-text">
-                                                    <h5 class="">{{ post.title }}</h5>
+                                                    <a href="{% pageurl post %}" class="card-link">
+                                                        <h5 class="">{{ post.title }}</h5>
+                                                    </a>
                                                     <p class="mb-2">{{ post.date }}</p>
                                                     <p class="">{{ post.intro }}</p>
                                                     <a href="{% pageurl post %}" class="card-link">Read post</a>

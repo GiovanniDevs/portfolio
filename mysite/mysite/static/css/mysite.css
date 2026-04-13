@@ -36,7 +36,7 @@ h5 {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: rgb(226, 226, 226);
+  color: rgb(226, 226, 226) !important;
 }
 
 .project-title {
@@ -69,6 +69,7 @@ body {
 
 a {
   color: white;
+  text-decoration: none !important;
 }
 
 footer {
@@ -140,6 +141,10 @@ footer {
   border-width: 0;
 }
 
+.project-card {
+  max-width: 16rem;
+}
+
 @media (max-width: 540px) {
   .shapeless {
     clip-path: none;
@@ -155,4 +160,35 @@ footer {
   .shifter {
     min-width: 5rem;
   }
+}
+
+/* ----- Projects List Cards ------ */
+
+.featured-card {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  background-color: #ffffff0c;
+  border-radius: 0%;
+  border-width: 0;
+}
+
+.featured-card .card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.tech-stack {
+  margin-top: auto;
+}
+
+.featured-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* adjust this number */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.projects-text {
+  font-size: 80%;
+  font-weight: 100;
 }
