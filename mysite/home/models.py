@@ -40,7 +40,18 @@ class HomePage(Page):
     )
 
     intro = RichTextField(blank=True)
-    about = RichTextField(blank=True)
+    about = RichTextField(
+        blank=True,
+        features=[
+            "h2",
+            "h3",
+            "bold",
+            "italic",
+            "link",
+            "ol",
+            "ul",
+            "rt_accent",
+        ],)
 
     top_project_title = models.CharField(
         max_length=120,
