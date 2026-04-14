@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
+{% load navigation_tags %}
 {% block body_class %}template-homepage{% endblock %}
 {% block content %}
     <div class="container">
@@ -40,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="row  offset-lg-1 more-margin">
+        <div id="work" class="row  offset-lg-1 more-margin">
             <div class="col col-md-10">
                 <h2 class="mb-4 section-title">
                     <span class="h5 jet-mono c-primary">02.</span> Some things I've built
@@ -90,7 +91,7 @@
                     </section>
                 {% endif %}
             </div>
-            <div class="row justify-content-center more-margin">
+            <div id="articles" class="row justify-content-center more-margin">
                 <div class="col  col-md-8 col-lg-6 ">
                     <h2>
                         <span class="h5 jet-mono c-primary">03.</span> Sometimes i write <i class="fa-solid fa-terminal"></i>
@@ -120,34 +121,19 @@
                        role="button">More Articles</a>
                 </div>
             </div>
-            <div class="row justify-content-center more-margin">
+            <div id="contact" class="row justify-content-center more-margin">
                 <div class="col  col-md-8 col-lg-6 ">
                     <h2>
                         <span class="h5 jet-mono c-primary">04.</span> Get in touch <i class="fa-solid fa-terminal"></i>
                     </h2>
-                    {% if page.featured_posts %}
-                        <section class="featured-posts">
-                            <p class="c-primary">Featured Posts</p>
-                            <div class="grid">
-                                {% for block in page.featured_posts %}
-                                    {% with post=block.value.specific %}
-                                        <div class="card my-3 blog-card">
-                                            <div class="card-body white-text">
-                                                <a href="{% pageurl post %}" class="card-link">
-                                                    <h5 class="">{{ post.title }}</h5>
-                                                </a>
-                                                <p class="l-text">{{ post.intro }}</p>
-                                                <p class="mb-2">{{ post.date }}</p>
-                                            </div>
-                                        </div>
-                                    {% endwith %}
-                                {% endfor %}
-                            </div>
-                        </section>
-                    {% endif %}
+                    <p class="c-primary">Email and LinkedIn are preferred</p>
+                    <div>
+                        {% if github_url %}<a href="{{ github_url }}">GitHub</a>{% endif %}
+                        {% if linkedin_url %}<a href="{{ linkedin_url }}">LinkedIn</a>{% endif %}
+                    </div>
                     <a class="ms-auto btn btn-outline-info c-button mt-4"
                        href="{% pageurl page.hero_cta_link %}"
-                       role="button">More Articles</a>
+                       role="button">Contact form</a>
                 </div>
             </div>
         </div>
