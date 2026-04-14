@@ -2,20 +2,59 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block body_class %}template-blogindexpage{% endblock %}
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <div class="intro">{{ page.intro|richtext }}</div>
-    {% for post in blogpages %}
-        {% with post=post.specific %}
-            <h2>
-                <a href="{% pageurl post %}">{{ post.title }}</a>
-            </h2>
-            {% with post.main_image as main_image %}
-                {% if main_image %}
-                    {% image main_image fill-160x100 %}
-                {% endif %}
-            {% endwith %}
-            <p>{{ post.intro }}</p>
-            {{ post.body|richtext }}
-        {% endwith %}
-    {% endfor %}
+    <div class="container blog-index-shell">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <section class="blog-index-hero custom-card shapeless">
+                    <p class="c-primary jet-mono mb-2">03. Journal</p>
+                    <h1 class="blog-index-title">{{ page.title }}</h1>
+                    <div class="blog-index-intro">{{ page.intro|richtext }}</div>
+                </section>
+            </div>
+        </div>
+        <div class="row justify-content-center blog-grid-row">
+            <div class="col-12 col-lg-10">
+                <div class="row g-4">
+                    {% for post in blogpages %}
+                        {% with post=post.specific %}
+                            <div class="col-12 col-md-6 col-xl-4">
+                                <article class="card blog-index-card h-100">
+                                    {% with post.main_image as main_image %}
+                                        {% if main_image %}
+                                            <a href="{% pageurl post %}"
+                                               class="blog-index-media-link"
+                                               aria-label="Read {{ post.title }}">
+                                                {% image main_image fill-760x460 class="card-img-top blog-index-media" %}
+                                            </a>
+                                        {% endif %}
+                                    {% endwith %}
+                                    <div class="card-body d-flex flex-column">
+                                        <p class="blog-index-meta c-primary mb-2">
+                                            <i class="fa-regular fa-calendar"></i>
+                                            {{ post.first_published_at|date:"j M Y" }}
+                                        </p>
+                                        <h2 class="blog-index-post-title h4 mb-2">
+                                            <a href="{% pageurl post %}" class="blog-index-post-link">{{ post.title }}</a>
+                                        </h2>
+                                        {% if post.intro %}<p class="blog-index-summary l-text mb-3">{{ post.intro }}</p>{% endif %}
+                                        <div class="mt-auto">
+                                            <a class="btn c-button blog-index-cta" href="{% pageurl post %}">
+                                                Read post <i class="fa-solid fa-arrow-right-long"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        {% endwith %}
+                    {% empty %}
+                        <div class="col-12">
+                            <div class="blog-empty custom-card">
+                                <p class="mb-0">No posts yet. Add your first post in the admin panel.</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
