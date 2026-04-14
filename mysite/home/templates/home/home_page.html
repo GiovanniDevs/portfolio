@@ -39,25 +39,32 @@
                 </h2>
                 <div class="row">
                     <div class="col-12 col-md-7 mb-3">
-                        <img class="img-fluid"
-                             src="../static/images/project.png"
-                             alt="featured project">
+                        {% if page.top_project_image %}
+                            {% image page.top_project_image fill-900x600 class="img-fluid" alt=page.top_project_title %}
+                        {% endif %}
                     </div>
                     <div class="col-12 col-md-5 d-flex flex-column text-end align-items-end">
                         <p class="c-primary">Featured project</p>
-                        <h3 class="project-title">Problem? Solved.</h3>
-                        <p class="project-text">
-                            A platform where workers share workplace issues and others add “Takes” with experiences and solutions, helping surface problems and inspire business ideas.
-                        </p>
-                        <p class="c-accent stack">
-                            JavaScript
-                            Python
-                            Django
-                            PostgreSQL
-                            Heroku
-                        </p>
+                        <h3 class="project-title">{{ page.top_project_title }}</h3>
+                        <p class="project-text">{{ page.top_project_text }}</p>
+                        <p class="c-accent stack">{{ page.top_project_stack|linebreaksbr }}</p>
                         <p class="link-icon">
-                            <i class="fa-brands fa-github"></i> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            {% if page.top_project_gh %}
+                                <a href="{{ page.top_project_gh }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="View project source code on GitHub">
+                                    <i class="fa-brands fa-github"></i>
+                                </a>
+                            {% endif %}
+                            {% if page.top_project_dep %}
+                                <a href="{{ page.top_project_dep }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   aria-label="View live deployed project">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            {% endif %}
                         </p>
                     </div>
                 </div>
@@ -82,59 +89,59 @@
                     </section>
                 {% endif %}
             </div>
-            <div id="articles" class="row justify-content-center more-margin">
-                <div class="col  col-md-8 col-lg-6 ">
-                    <h2>
-                        <span class="h5 jet-mono c-primary">03.</span> Sometimes i write <i class="fa-solid fa-terminal terminal-blink"></i>
-                    </h2>
-                    {% if page.featured_posts %}
-                        <section class="featured-posts">
-                            <p class="c-primary">Featured Posts</p>
-                            <div class="grid">
-                                {% for block in page.featured_posts %}
-                                    {% with post=block.value.specific %}
-                                        <div class="card my-3 blog-card">
-                                            <div class="card-body white-text">
-                                                <a href="{% pageurl post %}" class="card-link">
-                                                    <h5 class="">{{ post.title }}</h5>
-                                                </a>
-                                                <p class="l-text">{{ post.intro }}</p>
-                                                <p class="mb-2">{{ post.date }}</p>
-                                            </div>
+        </div>
+        <div id="articles" class="row justify-content-center more-margin">
+            <div class="col  col-md-8 col-lg-6 ">
+                <h2>
+                    <span class="h5 jet-mono c-primary">03.</span> Sometimes i write <i class="fa-solid fa-terminal terminal-blink"></i>
+                </h2>
+                {% if page.featured_posts %}
+                    <section class="featured-posts">
+                        <p class="c-primary">Featured Posts</p>
+                        <div class="grid">
+                            {% for block in page.featured_posts %}
+                                {% with post=block.value.specific %}
+                                    <div class="card my-3 blog-card">
+                                        <div class="card-body white-text">
+                                            <a href="{% pageurl post %}" class="card-link">
+                                                <h5 class="">{{ post.title }}</h5>
+                                            </a>
+                                            <p class="l-text">{{ post.intro }}</p>
+                                            <p class="mb-2">{{ post.date }}</p>
                                         </div>
-                                    {% endwith %}
-                                {% endfor %}
-                            </div>
-                        </section>
-                    {% endif %}
-                    <a class="ms-auto btn btn-outline-info c-button mt-4"
-                       href="{% pageurl page.hero_cta_link %}"
-                       role="button">More Articles</a>
-                </div>
+                                    </div>
+                                {% endwith %}
+                            {% endfor %}
+                        </div>
+                    </section>
+                {% endif %}
+                <a class="ms-auto btn btn-outline-info c-button mt-4"
+                   href="{% pageurl page.hero_cta_link %}"
+                   role="button">More Articles</a>
             </div>
-            <div id="contact" class="row justify-content-center more-margin mb-5">
-                <div class="col col-md-8 col-lg-6 text-center">
-                    <h2>
-                        <span class="h5 jet-mono c-primary">04.</span> Get in touch <i class="fa-solid fa-pen-nib"></i>
-                    </h2>
-                    <p class="c-primary">Email and LinkedIn are preferred</p>
-                    <div class="my-4 h2">
-                        {% with linkedin_url=settings.base.NavigationSettings.linkedin_url github_url=settings.base.NavigationSettings.github_url email=settings.base.NavigationSettings.email %}
-                            {% if linkedin_url or github_url or email %}
-                                {% if github_url %}<a href="{{ github_url }}"><i class="fa-brands fa-github"></i></a>{% endif %}
-                                {% if linkedin_url %}<a href="{{ linkedin_url }}"><i class="fa-brands fa-linkedin"></i></a>{% endif %}
-                                {% if email %}
-                                    <a href="mailto:{{ email }}"
-                                       title="{{ email }}"
-                                       aria-label="Email {{ email }}"><i class="fa-solid fa-envelope"></i></a>
-                                {% endif %}
+        </div>
+        <div id="contact" class="row justify-content-center more-margin mb-5">
+            <div class="col col-md-8 col-lg-6 text-center">
+                <h2>
+                    <span class="h5 jet-mono c-primary">04.</span> Get in touch <i class="fa-solid fa-pen-nib"></i>
+                </h2>
+                <p class="c-primary">Email and LinkedIn are preferred</p>
+                <div class="my-4 h2">
+                    {% with linkedin_url=settings.base.NavigationSettings.linkedin_url github_url=settings.base.NavigationSettings.github_url email=settings.base.NavigationSettings.email %}
+                        {% if linkedin_url or github_url or email %}
+                            {% if github_url %}<a href="{{ github_url }}"><i class="fa-brands fa-github"></i></a>{% endif %}
+                            {% if linkedin_url %}<a href="{{ linkedin_url }}"><i class="fa-brands fa-linkedin"></i></a>{% endif %}
+                            {% if email %}
+                                <a href="mailto:{{ email }}"
+                                   title="{{ email }}"
+                                   aria-label="Email {{ email }}"><i class="fa-solid fa-envelope"></i></a>
                             {% endif %}
-                        {% endwith %}
-                    </div>
-                    <a class="ms-auto btn btn-outline-info c-button my-4"
-                       href="contact"
-                       role="button">Contact form</a>
+                        {% endif %}
+                    {% endwith %}
                 </div>
+                <a class="ms-auto btn btn-outline-info c-button my-4"
+                   href="contact"
+                   role="button">Contact form</a>
             </div>
         </div>
     </div>

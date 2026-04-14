@@ -67,6 +67,16 @@ class HomePage(Page):
         help_text="Top project image"
     )
 
+    top_project_gh = models.URLField(
+        blank=True,
+        verbose_name="Link to the GitHub repo"
+    )
+
+    top_project_dep = models.URLField(
+        blank=True,
+        verbose_name="Link to the deployed site"
+    )
+
     featured_projects = StreamField(
         [("project", ProjectCardBlock())],
         blank=True,
@@ -110,6 +120,8 @@ class HomePage(Page):
                 FieldPanel("top_project_text"),
                 FieldPanel("top_project_stack"),
                 FieldPanel("top_project_image"),
+                FieldPanel("top_project_gh"),
+                FieldPanel("top_project_dep"),
             ],
             heading="Top project section",
         ),
