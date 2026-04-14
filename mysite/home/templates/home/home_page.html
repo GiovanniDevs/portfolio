@@ -25,19 +25,7 @@
                     <span class="h5 jet-mono c-primary">01.</span><span>About me</span>
                 </h2>
                 <div class="row mt-3 align-items-start">
-                    <div class="col-12 col-sm-8">
-                        <p class="">
-                            I'm Giovanni, a junior web developer based in Bristol. I recently retrained in tech through an <span class="c-accent">AI-Augmented Full-Stack</span> bootcamp, and since then I've just kept going. There's always something new to dig into, whether that's a framework I haven't touched yet or just keeping up with how fast everything moves in this space.
-                            I use <span class="c-accent">AI to work smarter and move faster</span>, but the thinking and decisions are mine. It's a tool in the box, <span class="c-accent">not a shortcut</span>.
-                        </p>
-                        <p>
-                            Personally, I gravitate more towards backend work. I like the logic side of things, how to structure something well and how to get it running smoothly in production. That said, I enjoy full-stack too. There's something satisfying about building both sides and seeing it all come together.
-                            I also studied Computer Generated Animation at uni, so I've got a bit of a creative background in the mix. It means I tend to think about problems differently, and I communicate well with all sorts of people.
-                        </p>
-                        <p class="c-accent">
-                            What I'm working with right now: Python, Django, Wagtail, HTML, CSS, JavaScript, PostgreSQL, Git & GitHub.
-                        </p>
-                    </div>
+                    <div class="col-12 col-sm-8">{{ page.about|richtext }}</div>
                     <div class=" col-12 col-sm-4 d-flex justify-content-center">
                         <div class="profile-img">{% image page.image min-200x200 %}</div>
                     </div>
