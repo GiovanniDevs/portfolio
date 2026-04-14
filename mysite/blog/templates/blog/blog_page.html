@@ -1,47 +1,76 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
-{% block body_class %}template-blogpage{% endblock %}
+{% block body_class %}
+    template-blogpage
+{% endblock body_class %}
 {% block content %}
-    <h1>{{ page.title }}</h1>
-    <h3>test</h3>
-    {{ page.author.all }}
-    <p class="meta">{{ page.date }}</p>
-    {% with authors=page.authors.all %}
-        {% if authors %}
-            <h3>Written by:</h3>
-            <ul>
-                {% for author in authors %}
-                    <li>
-                        {% image author.author_image fill-40x60 style="vertical-align: middle" %}
-                        {{ author.name }}
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>none</p>
-        {% endif %}
-    {% endwith %}
-    <div class="intro">{{ page.intro }}</div>
-    {{ page.body|richtext }}
-    {% for item in page.gallery_images.all %}
-        <div style="float: left; margin: 10px">
-            {% image item.image fill-320x240 %}
-            <p>{{ item.caption }}</p>
-        </div>
-    {% endfor %}
-    <p>
-        <a href="{{ page.get_parent.url }}">Return to blog</a>
-    </p>
-    {% with tags=page.tags.all %}
-        {% if tags %}
-            <div class="tags">
-                <h3>Tags</h3>
-                {% for tag in tags %}
-                    <a href="{% slugurl 'tags' %}?tag={{ tag }}">
-                        <button type="button">{{ tag }}</button>
-                    </a>
-                {% endfor %}
+    <div class="container blog-page-shell">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-9">
+                <article class="blog-page-article">
+                    <header class="blog-page-header custom-card">
+                        <p class="c-primary jet-mono mb-2">Blog entry</p>
+                        <h1 class="blog-page-title">{{ page.title }}</h1>
+                        <p class="blog-page-meta c-primary mb-0">
+                            <i class="fa-regular fa-calendar"></i>
+                            {{ page.date|date:"j M Y" }}
+                        </p>
+                        {% with authors=page.authors.all %}
+                            {% if authors %}
+                                <div class="blog-page-authors mt-4">
+                                    <h2 class="h6 mb-3">Written by</h2>
+                                    <ul class="blog-page-author-list list-unstyled mb-0">
+                                        {% for author in authors %}
+                                            <li class="blog-page-author-item">
+                                                {% if author.author_image %}
+                                                    <span class="blog-page-author-image">{% image author.author_image fill-56x56 %}</span>
+                                                {% endif %}
+                                                <span>{{ author.name }}</span>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endwith %}
+                        {% if page.intro %}<p class="blog-page-intro mt-4 mb-0">{{ page.intro }}</p>{% endif %}
+                    </header>
+                    <section class="blog-page-body mt-4">
+                        {{ page.body|richtext }}
+                    </section>
+                    {% with gallery=page.gallery_images.all %}
+                        {% if gallery %}
+                            <section class="blog-page-gallery mt-4">
+                                <h2 class="h5 mb-3">Gallery</h2>
+                                <div class="row g-3">
+                                    {% for item in gallery %}
+                                        <div class="col-12 col-md-6">
+                                            <figure class="blog-gallery-item mb-0">
+                                                {% image item.image fill-760x520 class="img-fluid" %}
+                                                {% if item.caption %}<figcaption class="blog-gallery-caption">{{ item.caption }}</figcaption>{% endif %}
+                                            </figure>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </section>
+                        {% endif %}
+                    {% endwith %}
+                    {% with tags=page.tags.all %}
+                        {% if tags %}
+                            <section class="blog-page-tags mt-4">
+                                <h2 class="h6 mb-3">Tags</h2>
+                                <div class="blog-tag-list">
+                                    {% for tag in tags %}
+                                        <a class="blog-tag-pill" href="{% slugurl 'tags' %}?tag={{ tag }}">{{ tag }}</a>
+                                    {% endfor %}
+                                </div>
+                            </section>
+                        {% endif %}
+                    {% endwith %}
+                    <p class="mt-4 mb-0">
+                        <a class="btn c-button" href="{{ page.get_parent.url }}">Return to blog</a>
+                    </p>
+                </article>
             </div>
-        {% endif %}
-    {% endwith %}
-{% endblock %}
+        </div>
+    </div>
+{% endblock content %}
