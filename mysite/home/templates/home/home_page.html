@@ -4,11 +4,11 @@
 {% block body_class %}template-homepage{% endblock %}
 {% block content %}
     <div class="container">
-        <div class="row justify-content-center my-5">
+        <div class="row justify-content-center my-5 pt-5">
             <div class="col col-md-10 custom-card shapeless d-flex flex-column mx-1">
                 <p class="c-primary">{{ page.hero_text }}</p>
                 <h1 class="white-text">{{ page.title }}</h1>
-                {{ page.intro|richtext }}
+                <div class="pe-3">{{ page.intro|richtext }}</div>
                 {% if page.hero_cta_link %}
                     <a class="ms-auto btn btn-outline-info c-button mt-4"
                        {% comment %}
