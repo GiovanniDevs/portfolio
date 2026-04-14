@@ -34,14 +34,14 @@ from wagtail.contrib.forms.panels import FormSubmissionsPanel
 class NavigationSettings(BaseGenericSetting):
     linkedin_url = models.URLField(verbose_name="LinkedIn URL", blank=True)
     github_url = models.URLField(verbose_name="GitHub URL", blank=True)
-    mastodon_url = models.URLField(verbose_name="Mastodon URL", blank=True)
+    email = models.EmailField(verbose_name="Your work Email", blank=True)
 
     panels = [
         MultiFieldPanel(
             [
                 FieldPanel("linkedin_url"),
                 FieldPanel("github_url"),
-                FieldPanel("mastodon_url"),
+                FieldPanel("email"),
             ],
             "Social settings",
         )

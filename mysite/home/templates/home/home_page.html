@@ -8,10 +8,13 @@
             <div class="col col-md-10 custom-card shapeless d-flex flex-column mx-1">
                 <p class="c-primary">{{ page.hero_text }}</p>
                 <h1 class="white-text">{{ page.title }}</h1>
-                {{ page.body|richtext }}
+                {{ page.intro|richtext }}
                 {% if page.hero_cta_link %}
                     <a class="ms-auto btn btn-outline-info c-button mt-4"
+                       {% comment %}
                        href="{% pageurl page.hero_cta_link %}"
+                       {% endcomment %}
+                       href="#contact"
                        role="button">{% firstof page.hero_cta page.hero_cta_link.title %}</a>
                 {% endif %}
             </div>
@@ -94,7 +97,7 @@
             <div id="articles" class="row justify-content-center more-margin">
                 <div class="col  col-md-8 col-lg-6 ">
                     <h2>
-                        <span class="h5 jet-mono c-primary">03.</span> Sometimes i write <i class="fa-solid fa-terminal"></i>
+                        <span class="h5 jet-mono c-primary">03.</span> Sometimes i write <i class="fa-solid fa-terminal terminal-blink"></i>
                     </h2>
                     {% if page.featured_posts %}
                         <section class="featured-posts">
@@ -121,20 +124,30 @@
                        role="button">More Articles</a>
                 </div>
             </div>
-            <div id="contact" class="row justify-content-center more-margin">
-                <div class="col  col-md-8 col-lg-6 ">
+            <div id="contact" class="row justify-content-center more-margin mb-5">
+                <div class="col col-md-8 col-lg-6 text-center">
                     <h2>
-                        <span class="h5 jet-mono c-primary">04.</span> Get in touch <i class="fa-solid fa-terminal"></i>
+                        <span class="h5 jet-mono c-primary">04.</span> Get in touch <i class="fa-solid fa-pen-nib"></i>
                     </h2>
                     <p class="c-primary">Email and LinkedIn are preferred</p>
-                    <div>
-                        {% if github_url %}<a href="{{ github_url }}">GitHub</a>{% endif %}
-                        {% if linkedin_url %}<a href="{{ linkedin_url }}">LinkedIn</a>{% endif %}
+                    <div class="my-4 h2">
+                        {% with linkedin_url=settings.base.NavigationSettings.linkedin_url github_url=settings.base.NavigationSettings.github_url email=settings.base.NavigationSettings.email %}
+                            {% if linkedin_url or github_url or email %}
+                                {% if github_url %}<a href="{{ github_url }}"><i class="fa-brands fa-github"></i></a>{% endif %}
+                                {% if linkedin_url %}<a href="{{ linkedin_url }}"><i class="fa-brands fa-linkedin"></i></a>{% endif %}
+                                {% if email %}
+                                    <a href="mailto:{{ email }}"
+                                       title="{{ email }}"
+                                       aria-label="Email {{ email }}"><i class="fa-solid fa-envelope"></i></a>
+                                {% endif %}
+                            {% endif %}
+                        {% endwith %}
                     </div>
-                    <a class="ms-auto btn btn-outline-info c-button mt-4"
-                       href="{% pageurl page.hero_cta_link %}"
+                    <a class="ms-auto btn btn-outline-info c-button my-4"
+                       href="contact"
                        role="button">Contact form</a>
                 </div>
             </div>
         </div>
-    {% endblock content %}
+    </div>
+{% endblock content %}

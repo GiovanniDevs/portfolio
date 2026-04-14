@@ -39,7 +39,8 @@ class HomePage(Page):
         help_text="Choose a page to link to for the Call to Action",
     )
 
-    body = RichTextField(blank=True)
+    intro = RichTextField(blank=True)
+    about = RichTextField(blank=True)
 
     featured_posts = StreamField(
         [("post", PageChooserBlock(page_type="blog.BlogPage"))],
@@ -71,7 +72,9 @@ class HomePage(Page):
             ],
             heading="Hero section",
         ),
-        FieldPanel('body'),
+        FieldPanel('intro'),
         FieldPanel("featured_posts"),
         FieldPanel("featured_projects"),
+        FieldPanel('about'),
+
     ]
