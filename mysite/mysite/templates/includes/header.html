@@ -5,14 +5,18 @@
         <div class="container ">
             <a class="project-icon navbar-brand-custom"
                href="{% pageurl site_root %}"><i class="fa-solid fa-meteor"></i></a>
-            <button class="navbar-toggler"
+            <button class="navbar-toggler c-nav-toggle"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarNav"
                     aria-controls="navbarNav"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="c-nav-toggle-icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
@@ -41,11 +45,18 @@
                             </li>
                         {% endfor %}
                     {% endif %}
-                    <a href=""></a>
-                    <button class="ms-2 btn btn-sm c-button" type="button">Resume</button>
-                    {% comment %} <li>
-                        <a class="nav-link" href="/search/">Search</a>
-                    </li> {% endcomment %}
+                    <li class="nav-item d-flex align-items-center">
+                        {% get_latest_cv_document as cv_document %}
+                        {% if cv_document %}
+                            <a class="ms-2 btn btn-sm c-button"
+                               href="{{ cv_document.url }}"
+                               download>Resume</a>
+                        {% else %}
+                            <button class="ms-2 btn btn-sm c-button nav-resume-btn"
+                                    type="button"
+                                    disabled>Resume</button>
+                        {% endif %}
+                    </li>
                 </ul>
             </div>
         </div>
