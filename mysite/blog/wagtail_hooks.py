@@ -43,4 +43,4 @@ def register_red_colour_feature(features):
 
 # Make the feature available in rich text editors by default.
     if feature_name not in features.default_features:
-    features.default_features.append(feature_name)
+        features.default_features.append(feature_name)

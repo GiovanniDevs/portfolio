@@ -1,8 +1,10 @@
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from django import forms
 from django.db import models
+
+from wagtail import blocks
 from wagtail.models import Page, Orderable
-from wagtail.fields import RichTextField
+from wagtail.fields import RichTextField, StreamField
 from wagtail.admin.panels import FieldPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.admin.panels import MultiFieldPanel
@@ -10,7 +12,7 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 from wagtail.search import index
 
-from wagtail.search import index
+from blog.blocks import CodeBlock
 
 
 class BlogIndexPage(Page):
@@ -37,7 +39,29 @@ class BlogPageTag(TaggedItemBase):
 class BlogPage(Page):
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
-    body = RichTextField(blank=True)
+    body = StreamField(
+        [
+            (
+                "rich_text",
+                blocks.RichTextBlock(
+                    features=[
+                        "h2", "h3", "h4",
+                        "bold", "italic",
+                        "ol", "ul",
+                        "link",
+                        "image",
+                        "code",
+                        "embed",
+                        "colour-red",
+                    ],
+                    label="Rich Text",
+                ),
+            ),
+            ("code_block", CodeBlock()),
+        ],
+        use_json_field=True,
+        blank=True,
+    )
 
     authors = ParentalManyToManyField('blog.Author', blank=True)
 

@@ -549,6 +549,17 @@ main {
 
 /* ----- Blog Detail Page ----- */
 
+.blog-code {
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
 .blog-page-shell {
   margin-top: 2rem;
   margin-bottom: 3.5rem;
