@@ -11,7 +11,7 @@
                 <h2 class="hero-title faded-title pb-5">{{ page.hero_lead }}</h2>
                 <div class="pe-3">{{ page.intro|richtext }}</div>
                 {% if page.hero_cta_link %}
-                    <a class="ms-auto btn btn-outline-info c-button mt-4"
+                    <a class="me-auto btn btn-outline-info c-button mt-4"
                        href="{% pageurl page.hero_cta_link %}"
                        role="button">{% firstof page.hero_cta page.hero_cta_link.title %}</a>
                 {% endif %}
