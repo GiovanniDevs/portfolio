@@ -23,6 +23,12 @@ class HomePage(Page):
         blank=True,
         max_length=255, help_text="Write an introduction for the site"
     )
+
+    hero_lead = models.CharField(
+        blank=True,
+        max_length=255, help_text="Write an introduction for the site"
+    )
+
     hero_cta = models.CharField(
         blank=True,
         verbose_name="Hero CTA",

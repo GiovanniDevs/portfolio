@@ -97,17 +97,21 @@
                         <p class="c-primary">Featured Posts</p>
                         <div class="grid">
                             {% for block in page.featured_posts %}
-                                {% with post=block.value.specific %}
-                                    <div class="card my-3 blog-card">
-                                        <div class="card-body white-text">
-                                            <a href="{% pageurl post %}" class="card-link">
-                                                <h5 class="">{{ post.title }}</h5>
-                                            </a>
-                                            <p class="l-text">{{ post.intro }}</p>
-                                            <p class="mb-2">{{ post.date }}</p>
-                                        </div>
-                                    </div>
-                                {% endwith %}
+                                {% if block.value %}
+                                    {% with post=block.value.specific %}
+                                        {% if post and post.live %}
+                                            <div class="card my-3 blog-card">
+                                                <div class="card-body white-text">
+                                                    <a href="{% pageurl post %}" class="card-link">
+                                                        <h5>{{ post.title }}</h5>
+                                                    </a>
+                                                    <p class="l-text">{{ post.intro }}</p>
+                                                    <p class="mb-2">{{ post.date }}</p>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endif %}
                             {% endfor %}
                         </div>
                     </section>
