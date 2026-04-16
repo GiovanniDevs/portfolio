@@ -122,8 +122,11 @@ class HomePage(Page):
             [
                 FieldPanel("image"),
                 FieldPanel("hero_text"),
+                FieldPanel("hero_lead"),
                 FieldPanel("hero_cta"),
                 FieldPanel("hero_cta_link"),
+
+
             ],
             heading="Hero section",
         ),

@@ -26,7 +26,7 @@ h1 {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 400%;
+  font-size: 500%;
   color: rgb(226, 226, 226);
 }
 
@@ -37,7 +37,24 @@ h5 {
   font-family: "Space Grotesk", sans-serif;
   font-weight: 500;
   font-style: normal;
-  color: rgb(226, 226, 226) !important;
+  color: rgb(226, 226, 226);
+}
+
+.hero-title {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 500%;
+  color: rgb(226, 226, 226);
+  line-height: 0.75;
+}
+
+.faded-title {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.575), #d1954b7a);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .project-title {

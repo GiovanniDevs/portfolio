@@ -7,7 +7,8 @@
         <div class="row justify-content-center my-5 pt-5">
             <div class="col col-md-10 custom-card shapeless d-flex flex-column mx-1">
                 <p class="c-primary">{{ page.hero_text }}</p>
-                <h1 class="white-text">{{ page.title }}</h1>
+                <h1 class="white-text hero-title mb-1">{{ page.title }}</h1>
+                <h2 class="hero-title faded-title pb-5">{{ page.hero_lead }}</h2>
                 <div class="pe-3">{{ page.intro|richtext }}</div>
                 {% if page.hero_cta_link %}
                     <a class="ms-auto btn btn-outline-info c-button mt-4"
