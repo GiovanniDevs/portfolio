@@ -11,10 +11,7 @@
                 <div class="pe-3">{{ page.intro|richtext }}</div>
                 {% if page.hero_cta_link %}
                     <a class="ms-auto btn btn-outline-info c-button mt-4"
-                       {% comment %}
                        href="{% pageurl page.hero_cta_link %}"
-                       {% endcomment %}
-                       href="#contact"
                        role="button">{% firstof page.hero_cta page.hero_cta_link.title %}</a>
                 {% endif %}
             </div>
@@ -115,9 +112,12 @@
                         </div>
                     </section>
                 {% endif %}
-                <a class="ms-auto btn btn-outline-info c-button mt-4"
-                   href="{% pageurl page.hero_cta_link %}"
-                   role="button">More Articles</a>
+                {% slugurl 'blog' as blog_url %}
+                {% if blog_url %}
+                    <a class="ms-auto btn btn-outline-info c-button mt-4"
+                       href="{{ blog_url }}"
+                       role="button">More Articles</a>
+                {% endif %}
             </div>
         </div>
         <div id="contact" class="row justify-content-center more-margin mb-5">
