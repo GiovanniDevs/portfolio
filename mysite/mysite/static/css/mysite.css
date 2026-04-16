@@ -81,7 +81,6 @@ html {
 body {
   font-family: "JetBrains Mono", monospace;
   min-height: 100vh;
-  background-color: red;
   color: var(--text);
   font-size: 90%;
   padding-top: 80px;
