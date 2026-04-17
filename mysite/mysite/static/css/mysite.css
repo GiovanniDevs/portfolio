@@ -91,6 +91,10 @@ footer {
   background-color: #27272721;
 }
 
+code {
+  background-color: #00000024;
+  color: var(--accent);
+}
 .more-margin {
   margin-top: 20rem;
 }
