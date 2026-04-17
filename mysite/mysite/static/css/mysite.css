@@ -645,6 +645,8 @@ main {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(106, 189, 210, 0.2);
   padding: 1.3rem;
+  font-weight: 100;
+  color: #e0e0e0;
 }
 
 .blog-page-body p,
