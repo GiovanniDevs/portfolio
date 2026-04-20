@@ -34,6 +34,7 @@
             {% block extra_css %}{# Override this in templates to add extra stylesheets #}{% endblock %}
         </head>
         <body class="{% block body_class %}{% endblock %}">
+            <a class="visually-hidden-focusable" href="#main">Skip to main content</a>
             <div class="bg-fixed"></div>
             <div class="page-content">
                 {% include "includes/header.html" %}

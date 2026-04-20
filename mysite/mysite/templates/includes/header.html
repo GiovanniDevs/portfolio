@@ -1,10 +1,11 @@
 {% load wagtailcore_tags navigation_tags wagtailuserbar %}
 <header>
     {% get_site_root as site_root %}
-    <nav class="blur-nav navbar navbar-expand-lg fixed-top">
+    <nav class="blur-nav navbar navbar-expand-lg fixed-top" aria-label="Primary navigation">
         <div class="container ">
             <a class="project-icon navbar-brand-custom"
-               href="{% pageurl site_root %}"><i class="fa-solid fa-meteor"></i></a>
+               href="{% pageurl site_root %}"
+               aria-label="Go to homepage"><i class="fa-solid fa-meteor"></i></a>
             <button class="navbar-toggler c-nav-toggle"
                     type="button"
                     data-bs-toggle="collapse"
