@@ -4,234 +4,303 @@ A personal portfolio and blog CMS built with Wagtail and Django.
 
 This project started from the official Wagtail beginner and extended tutorials, and was then expanded with custom homepage sections, content blocks, rich text editor extensions, and production-focused configuration.
 
-## Project Scope
+![alt text](mysite/mysite/static/images/responsive.png)
+4
 
-This repository implements a content-managed portfolio website with:
+## Table of Contents
 
-- A custom homepage with hero, about, featured work, and featured posts
-- A full blog system (authors, tags, gallery images, code blocks)
-- Reusable StreamField blocks for portfolio content
-- Site-wide navigation/footer settings managed in Wagtail admin
-- Contact form page powered by Wagtail forms
-- Production-ready settings for static/media and database deployment
+- [Typography](#typography)
+- [Colour Scheme](#colour-scheme)
+- [Database Diagram](#database-diagram)
+- [Features](#features)
+- [Home page](#home-page)
+- [Blog](#blog)
+- [Navigation](#navigation)
+- [Authentication & Authorisation](#authentication--authorisation)
+- [Technologies Used](#technologies-used)
+- [Libraries Used](#libraries-used)
+- [Deployment](#deployment)
 
-This README documents what currently exists. You can add product details such as wireframes, deployment provider steps, and content strategy as needed.
+## Typography
+
+This project uses a clear two-font system to balance personality and technical clarity.
+
+- **Display / headings:** Space Grotesk (Google Fonts)
+- **Body / utility text:** JetBrains Mono (Google Fonts)
+
+## Colour Scheme
+
+The visual identity is dark, modern, and editorial with cyan and amber accents.
+
+### CSS variables
+
+- `--text`: `#bebebe`
+- `--background`: `#1f2633`
+- `--primary`: `#6abdd2`
+- `--secondary`: `#1c3f4d`
+- `--accent`: `#d1944b`
+
+### Usage pattern
+
+- Primary color is used for links, navigation, button outlines, and section markers.
+- Accent color is used for emphasis, stack labels, hover highlights, and custom rich text styling.
+- The page uses a vertical background gradient from `--background` to `--secondary`.
+- Layered glass-style UI is achieved through transparency and blur effects in navigation/cards.
+
+## Database Diagram
+
+```mermaid
+erDiagram
+		HOME_HOMEPAGE ||--o{ PORTFOLIO_PORTFOLIOPAGE : parent_page
+		BLOG_BLOGPAGE ||--o{ BLOG_BLOGPAGEGALLERYIMAGE : has_many
+		BLOG_BLOGPAGE }o--o{ BLOG_AUTHOR : authors_m2m
+		BLOG_BLOGPAGE ||--o{ BLOG_BLOGPAGETAG : tagged_items
+		TAGGIT_TAG ||--o{ BLOG_BLOGPAGETAG : tag_reference
+		BASE_FORMPAGE ||--o{ BASE_FORMFIELD : form_fields
+
+		BASE_NAVIGATIONSETTINGS {
+			int id PK
+			string linkedin_url
+			string github_url
+			string email
+		}
+
+		BASE_FOOTERTEXT {
+			int id PK
+			text body
+			bool live
+			datetime first_published_at
+			datetime latest_revision_created_at
+		}
+
+		BASE_FORMPAGE {
+			int id PK
+			text intro
+			text thank_you_text
+			string from_address
+			string to_address
+			string subject
+		}
+
+		BASE_FORMFIELD {
+			int id PK
+			int page_id FK
+			string label
+			string field_type
+			bool required
+			string choices
+			int sort_order
+		}
+
+		BLOG_BLOGINDEXPAGE {
+			int id PK
+			text intro
+		}
+
+		BLOG_BLOGPAGE {
+			int id PK
+			date date
+			string intro
+			json body_streamfield
+		}
+
+		BLOG_AUTHOR {
+			int id PK
+			string name
+			int author_image_id FK
+		}
+
+		BLOG_BLOGPAGEGALLERYIMAGE {
+			int id PK
+			int page_id FK
+			int image_id FK
+			string caption
+			int sort_order
+		}
+
+		BLOG_BLOGTAGINDEXPAGE {
+			int id PK
+		}
+
+		HOME_HOMEPAGE {
+			int id PK
+			int image_id FK
+			string hero_text
+			string hero_lead
+			string hero_cta
+			int hero_cta_link_id FK
+			text intro
+			text about
+			string top_project_title
+			text top_project_text
+			text top_project_stack
+			int top_project_image_id FK
+			string top_project_gh
+			string top_project_dep
+			json featured_projects_stream
+			json featured_posts_stream
+		}
+
+		PORTFOLIO_PORTFOLIOPAGE {
+			int id PK
+			json body_streamfield
+		}
+```
 
 ## Features
 
-## 1) Content Models and CMS Features
+### CMS and content architecture
 
-- `HomePage` model with:
-  - Hero image/text/lead/CTA fields
-  - Rich text intro + about sections
-  - Top project showcase fields (title, summary, stack, links)
-  - StreamField sections for featured projects and featured posts
-  - Latest blog post added to template context
-- `BlogIndexPage` with reverse chronological live post listing
-- `BlogPage` with:
-  - Date, intro, StreamField body
-  - Author relationships
-  - Tags
-  - Search indexing for intro/body
-  - Gallery relation with orderable images
-- `BlogTagIndexPage` to filter posts by `?tag=`
-- `PortfolioPage` (child of Home) with StreamField body
-- `FormPage` and inline `FormField` definitions via Wagtail forms
+- Wagtail-driven portfolio and blog CMS.
+- Structured, editor-friendly content through StreamField and snippets.
+- Homepage context automatically injects the latest published blog post.
 
-## 2) Custom StreamField Blocks
+### Custom blocks (complete list)
 
-- Shared blocks in `base` app:
-  - Heading block (size-aware)
-  - Captioned image block
-  - Paragraph and embed support
-- Portfolio blocks:
-  - Card block
-  - Featured posts block (chooses blog pages)
-- Homepage-specific project card block
-- Blog custom code block with language selector
+#### Base app blocks
 
-## 3) Snippets, Settings, and Template Tags
+- `CaptionedImageBlock`
+- `HeadingBlock`
+- `BaseStreamBlock`
+  - `heading_block`
+  - `paragraph_block`
+  - `image_block`
+  - `embed_block`
 
-- Global navigation settings (`LinkedIn`, `GitHub`, `Email`)
-- Editable footer snippet with draft/revision/preview support
-- Custom template tags for:
-  - Footer text rendering
-  - Site root lookup
-  - Latest CV/Resume document lookup
+#### Blog app blocks
 
-## 4) Frontend and UX
+- `CodeBlock`
+  - language selector: python, javascript, bash, html, css, json, sql
+  - code text body
 
-- Custom templates for home/blog/portfolio/form/search
-- Bootstrap + custom CSS
-- Font Awesome icons
-- Favicon, semantic main layout, responsive navigation/footer
-- Wagtail user bar integrated in header
+#### Home app blocks
 
-## 5) Search
+- `ProjectCardBlock`
+  - title
+  - rich description
+  - tech stack
+  - repository link
+  - deployed link (optional)
 
-- Search view and paginated search template are implemented
-- Search route is currently commented in URL config (see "Known Gaps / TODO")
+#### Portfolio app blocks
 
-## 6) Production and Ops
+- `CardBlock`
+- `FeaturedPostsBlock`
+- `PortfolioStreamBlock` (extends `BaseStreamBlock` and adds portfolio-specific sections)
 
-- WhiteNoise static handling
-- Cloudinary media storage in production settings
-- PostgreSQL via `dj-database-url` in production
-- SSL redirect and trusted CSRF origin support
-- Build script for install + collectstatic + migrate
+### Rich text editor custom features
 
-## Tutorial Alignment
+- `rt_accent` inline style (accented text via `span.c-accent`).
+- `colour-red` inline style (red emphasis via `span.rt-red`).
 
-The implementation broadly covers the official Wagtail tutorial journey:
+### Snippets, settings, and template tags
 
-- Beginner tutorial: homepage extension, blog, authors, tags, gallery, context overrides
-- Extended tutorial: footer/settings/snippets, menu, forms, StreamField portfolio, search, deployment readiness
+- `NavigationSettings` (LinkedIn, GitHub, Email) as site setting.
+- `FooterText` as snippet with draft/revision/preview workflow.
+- Template tags:
+  - `get_footer_text`
+  - `get_site_root`
+  - `get_latest_cv_document`
 
-The project also adds custom functionality beyond tutorial scope (custom rich text features, code blocks, advanced homepage sections, CV document lookup).
+## Home page
 
-## Tech Stack
+The homepage is a highly customized, section-based landing experience:
 
-- Python 3
+1. **Hero**
+   - Intro copy, lead line, CTA label, CTA internal page link.
+2. **About**
+   - Rich text with custom accent style support.
+   - Profile image panel.
+3. **Top project**
+   - Showcase card with image, description, stack list, GitHub and live links.
+4. **Featured projects**
+   - StreamField-driven grid using `ProjectCardBlock`.
+5. **Featured articles**
+   - Editor-selected blog posts + link to blog index.
+6. **Contact area**
+   - Social/email links from global settings.
+   - Contact form page CTA.
+
+## Blog
+
+The blog subsystem includes:
+
+- `BlogIndexPage` with reverse-chronological listing of live posts.
+- `BlogPage` with date, intro, StreamField body, authors, and gallery images.
+- `Author` snippet model with optional avatar.
+- `BlogPageGalleryImage` orderable relationship per post.
+
+Frontend blog templates provide:
+
+- Rich blog listing cards with optional hero image per post.
+- Author chips, image gallery on detail pages.
+- Custom code block rendering through `blog/blocks/code_block.html`.
+
+## Navigation
+
+Navigation behavior is context-aware:
+
+- Fixed, blurred top navbar.
+- On homepage:
+  - local anchor links (`About`, `Work`, `Articles`, `Contact me`)
+  - plus in-menu child pages
+- On non-home pages:
+  - in-menu child pages only
+
+Additional navigation utilities:
+
+- Resume button auto-resolves the newest Wagtail document containing “CV” or “Resume” in its title.
+- Footer renders social links from `NavigationSettings`.
+- Footer text is dynamically pulled from the live `FooterText` snippet.
+
+## Authentication & Authorisation
+
+Current implementation relies on standard Django/Wagtail access control:
+
+- Authentication: default Django + Wagtail admin login.
+- Authorisation: role/permission management through Wagtail and Django admin groups.
+- Public visitor access: controlled by Wagtail page publish state (`live`).
+
+No custom public user registration, custom auth backend, or member-only gated frontend is currently implemented.
+
+## Technologies Used
+
+- Python
 - Django 6.0.3
 - Wagtail 7.3.1
 - SQLite (development)
-- PostgreSQL (production)
-- WhiteNoise
-- Cloudinary (`django-cloudinary-storage`)
-- django-taggit, django-modelcluster
-- Bootstrap 5, Font Awesome
+- PostgreSQL (production target)
+- Bootstrap 5
 
-## Repository Layout
+## Libraries Used
 
-```
-.
-├── build.sh
-├── README.md
-└── mysite/
-		├── manage.py
-		├── requirements.txt
-		├── base/
-		├── blog/
-		├── home/
-		├── portfolio/
-		├── search/
-		└── mysite/
-				├── urls.py
-				└── settings/
-						├── base.py
-						├── dev.py
-						└── production.py
-```
+### Core
 
-## Local Development Setup
+- `wagtail`
+- `Django`
+- `django-modelcluster`
+- `django-taggit`
+- `django-filter`
 
-## Prerequisites
+### Deployment / infrastructure
 
-- Python 3.10+
-- `pip`
-- Virtual environment support (`venv`)
+- `whitenoise`
+- `dj-database-url`
+- `psycopg2-binary`
+- `gunicorn`
+- `django-cloudinary-storage`
+- `cloudinary`
 
-## Install
+## Deployment
 
-From repository root:
+Deployment architecture in this project includes:
 
-```bash
-cd mysite
-python -m venv .venv
-```
+- Build pipeline through `build.sh` (`install`, `collectstatic`, `migrate`).
+- Static asset handling via WhiteNoise compressed manifest storage.
+- Cloudinary-backed media storage in production.
+- Database URL configuration via `dj-database-url`.
+- HTTPS redirect and trusted CSRF origin support in production settings.
 
-Activate virtual environment:
+For the complete deployment walkthrough, use your published article:
 
-- Windows PowerShell:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-- macOS/Linux:
-
-```bash
-source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Apply migrations and run:
-
-```bash
-python manage.py migrate
-python manage.py runserver
-```
-
-Create admin user:
-
-```bash
-python manage.py createsuperuser
-```
-
-Admin URL: `http://127.0.0.1:8000/admin/`
-
-## Build Script
-
-The repository includes `build.sh`:
-
-```bash
-#!/usr/bin/env bash
-set -o errexit
-cd mysite
-pip install -r requirements.txt
-python manage.py collectstatic --no-input --clear
-python manage.py migrate
-```
-
-Useful for CI/deployment build steps.
-
-## Configuration
-
-## Development
-
-- Uses `mysite/settings/dev.py`
-- SQLite database
-- Debug enabled
-
-## Production
-
-`mysite/settings/production.py` expects environment variables, including:
-
-- `SECRET_KEY`
-- `ALLOWED_HOSTS`
-- `CLOUDINARY_CLOUD_NAME`
-- `CLOUDINARY_API_KEY`
-- `CLOUDINARY_API_SECRET`
-- `DATABASE_URL` (for `dj-database-url`)
-- `DJANGO_CSRF_TRUSTED_ORIGINS`
-
-## Known Gaps / TODO
-
-- Search endpoint in `mysite/urls.py` is currently commented out:
-  - `path("search/", search_views.search, name="search")`
-- README does not yet include:
-  - Wireframes/design rationale
-  - Deployment provider runbook
-  - Content model diagrams
-  - Test strategy and coverage details
-
-## Suggested Next Additions
-
-You mentioned you will add missing details. Good additions to this README:
-
-- Product goals and target audience
-- Wireframes / UX screenshots
-- Deployment platform steps (Render/Fly/Heroku/etc.)
-- CI pipeline notes
-- Backup and media strategy
-- Security checklist (secrets, hosts, HTTPS, admin hardening)
-- Manual test checklist and regression scenarios
-
-## License
-
-Add your preferred license here.
+- **Deployment guide:** [Read the full deployment article](https://www.linkedin.com/pulse/deploying-wagtail-site-render-practical-guide-giovanni-d-amico-23nfe/)
